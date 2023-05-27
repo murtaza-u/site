@@ -1,0 +1,25 @@
+on:
+  push:
+    branches: [ "main" ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Nix Quick Install
+        uses: nixbuild/nix-quick-install-action@v22
+        with:
+          nix_conf: experimental-features = nix-command flakes
+
+      - name: nix build
+        run: "nix build"
+
+      - name: push to netlify
+        uses: nwtgck/actions-netlify@v2.0.0
+        env:
+          NETLIFY_AUTH_TOKEN: ${{  secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        with:
+          publish-dir: ./result/public
+          production-branch: main

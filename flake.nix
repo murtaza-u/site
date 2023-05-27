@@ -13,7 +13,10 @@
         src = self;
         buildInputs = [ pkgs.zola ];
         buildPhase = "zola build";
-        installPhase = "cp -r public $out";
+        installPhase = ''
+          mkdir -p $out/public
+          cp -r public $out
+        '';
       };
       devShells.${system}.default = pkgs.mkShell {
         packages = with pkgs; [
