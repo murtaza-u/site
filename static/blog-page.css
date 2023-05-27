@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+pre {
+  overflow: scroll;
+  padding: 1rem;
+}
+
+code,
+code * {
+  font-family: 'Iosevka Web';
+}
+
+.container {
+  width: 60%;
+  margin: 1rem auto;
+}
+
+.title,
+.subtitle {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+p {
+  margin: 2rem 0;
+  text-align: justify;
+}
+
+a {
+  text-decoration: none;
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    width: 90%;
+  }
+}
