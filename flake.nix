@@ -8,6 +8,13 @@
     in
     {
       formatter.${system} = pkgs.nixpkgs-fmt;
+      packages.${system}.default = pkgs.stdenv.mkDerivation {
+        name = "public";
+        src = self;
+        buildInputs = [ pkgs.zola ];
+        buildPhase = "zola build";
+        installPhase = "cp -r public $out";
+      };
       devShells.${system}.default = pkgs.mkShell {
         packages = with pkgs; [
           zola
