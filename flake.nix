@@ -10,7 +10,7 @@
       formatter.${system} = pkgs.nixpkgs-fmt;
       devShells.${system}.default = pkgs.mkShell {
         packages = with pkgs; [
-          hugo
+          zola
           nodePackages.vscode-langservers-extracted
           typescript
           nodePackages.typescript-language-server

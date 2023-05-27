@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}
+Freelance Services
+{% endblock %}
+
+{% block css %}
+<link href="/services.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <section>
+    <div class="image">
+      <img src="/gopher.svg" />
+    </div>
+    <div class="content">
+      <h2>RESTful services using Go and OpenAPI</h2>
+      <p>
+        By leveraging the power of Go, a statically-typed language
+        known for its simplicity, speed, and concurrency support, I
+        can create high-performance APIs that handle concurrent
+        requests efficiently, scale effortlessly and at the same time
+        adhere to industry standards.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="image">
+      <img src="/kubernetes.svg" />
+    </div>
+    <div class="content">
+      <h2>Kubernetes</h2>
+      <p>
+        Are you currently operating a Kubernetes cluster within your
+        infrastructure or considering migrating to Kubernetes? In
+        either scenario, my expertise in Kubernetes can greatly assist
+        you in efficiently deploying, scaling, and managing
+        microservices using a declarative approach. I specialize in
+        harnessing the full potential of Kubernetes to construct and
+        maintain resilient microservice architectures.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="image">
+      <img src="/grpc.png" />
+    </div>
+    <div class="content">
+      <h2>Inter-microservice communication using gRPC</h2>
+      <p>
+        In today's distributed systems landscape, microservices have
+        become a popular architectural pattern due to their
+        scalability, flexibility, and ease of development. However,
+        effective communication between these services is crucial for
+        the overall success of a microservices-based application.
+      </p>
+      <p>
+        My offerings include: understanding your current architecture
+        and improving upon it by implementing gRPC based communication
+        using protocol buffers as a data exchange format.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="image">
+      <img src="/aws.png" />
+    </div>
+    <div class="content">
+      <h2>Deploying your application</h2>
+      <p>
+        To ensure your customers can access and utilize your beautiful
+        application, it is crucial to deploy it on the cloud. I am here to
+        provide assistance in deploying your applications to AWS. My services
+        include:
+      </p>
+      <ul>
+        <li>
+          Provision EC2 instance in a way that adheres to security
+          best-practices.
+        </li>
+        <li>
+          Containerize application. If you have multiple services, I
+          will deploy a NGINX reverse proxy to efficiently route
+          traffic between these different applications.
+        </li>
+        <li>Configure DNS</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="image">
+      <img src="/ansible.png" />
+    </div>
+    <div class="content">
+      <h2>Automation</h2>
+      <ol>
+        <li>
+          <h3>Automatic builds and deployment (CI/CD) using GitHub actions:</h3>
+          <ul>
+            <li>
+              Implement continuous integration and deployment
+              pipelines using GitHub actions.
+            </li>
+            <li>
+              Automate build, test, and deployment processes to
+              accelerate software delivery.
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <h3>Management automation with Ansible:</h3>
+          <ul>
+            <li>
+              Employ Ansible to automate management tasks across your
+              infrastructure.
+            </li>
+            <li>
+              Simplify and standardize configuration management,
+              system provisioning, and application deployment.
+            </li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </section>
+</div>
+{% endblock %}
