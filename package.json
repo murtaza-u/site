@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "build": "tailwindcss build -o assets/css/tailwind.css --minify",
+    "watch": "tailwindcss build -o assets/css/tailwind.css --watch",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "daisyui": "^4.10.2",
+    "prettier-plugin-go-template": "^0.0.15",
+    "prettier-plugin-tailwindcss": "^0.5.14",
+    "tailwindcss": "^3.4.3"
+  }
+}

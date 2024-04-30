@@ -1,0 +1,109 @@
+{{ define "head" }}
+  <style>
+    @media (min-width: 1024px) {
+      .diagonal-cut {
+        background-image: -webkit-linear-gradient(30deg, #fff 50%, #abc3d6 50%);
+      }
+    }
+  </style>
+{{ end }}
+
+{{ define "main" }}
+  <!-- nav (<lg) -->
+  <header class="lg:hidden">
+    <nav class="navbar flex items-center justify-between">
+      <ul class="space-x-4 px-2">
+        <li>
+          <a class="border-y-2 border-primary py-1" href="/">Home</a>
+        </li>
+        <li>
+          <a class="py-1" href="https://blog.murtazau.xyz" target="_blank">
+            Blog
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- hero -->
+  <section
+    class="diagonal-cut flex h-screen flex-col justify-center lg:justify-between"
+  >
+    <!-- nav (>=lg) -->
+    <header class="hidden lg:block">
+      <nav class="navbar flex items-center justify-between">
+        <ul class="space-x-4 px-2">
+          <li>
+            <a class="border-y-2 border-primary py-1" href="/">Home</a>
+          </li>
+          <li>
+            <a class="py-1" href="https://blog.murtazau.xyz" target="_blank">
+              Blog
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      {{- with resources.Get "murtaza-udaipurwala.webp" }}
+        <img
+          loading="eager"
+          class="mx-auto rounded-full shadow-xl"
+          src="{{ .RelPermalink }}"
+          alt="Photo of Murtaza Udaipurwala"
+          width="300px"
+        />
+      {{- end }}
+      <h1 class="mb-5 mt-10 text-center text-4xl font-bold tracking-wide">
+        MURTAZA UDAIPURWALA
+      </h1>
+      <ul class="flex justify-center space-x-4 px-2">
+        {{- with resources.Get "icon/github.svg" }}
+          <li>
+            <a class="py-1" href="https://github.com/murtaza-u" target="_blank">
+              <img src="{{ .Permalink }}" alt="GitHub" />
+            </a>
+          </li>
+        {{- end }}
+        {{- with resources.Get "icon/mastodon.svg" }}
+          <li>
+            <a
+              class="py-1"
+              href="https://hachyderm.io/@murtaza"
+              target="_blank"
+            >
+              <img src="{{ .Permalink }}" alt="Mastodon" />
+            </a>
+          </li>
+        {{- end }}
+        {{- with resources.Get "icon/twitter.svg" }}
+          <li>
+            <a
+              class="py-1"
+              href="https://twitter.com/murtaza_u_"
+              target="_blank"
+            >
+              <img src="{{ .Permalink }}" alt="Twitter" />
+            </a>
+          </li>
+        {{- end }}
+        {{- with resources.Get "icon/linkedin.svg" }}
+          <li>
+            <a
+              class="py-1"
+              href="https://linkedin.com/in/murtaza-u"
+              target="_blank"
+            >
+              <img src="{{ .Permalink }}" alt="Linkedin" />
+            </a>
+          </li>
+        {{- end }}
+      </ul>
+    </main>
+    <aside class="hidden lg:block">
+      {{- with resources.Get "gopher.png" }}
+        <img src="{{ .Permalink }}" alt="Gopher" width="100px" />
+      {{- end }}
+    </aside>
+  </section>
+{{ end }}

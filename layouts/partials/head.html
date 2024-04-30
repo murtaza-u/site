@@ -1,0 +1,66 @@
+{{ $baseURL := strings.TrimSuffix "/" site.BaseURL -}}
+
+
+<!-- Eg:
+  Murtaza Udaipurwala
+  Blog | Murtaza Udaipurwala
+-->
+<title>
+  {{- if .IsHome }}
+    {{- site.Title -}}
+  {{ else }}
+    {{- fmt.Printf "%s | %s" .Title site.Title -}}
+  {{ end -}}
+</title>
+
+<!-- seo -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+<meta
+  name="description"
+  content="{{ or .Params.description site.Params.description }}"
+/>
+<meta property="og:title" content="{{ or .Title site.Title }}" />
+<meta property="og:type" content="website" />
+<meta
+  property="og:image"
+  content="{{ fmt.Printf `%s/%s` $baseURL site.Params.image }}"
+/>
+<meta property="og:url" content="{{ $baseURL }}" />
+<meta property="og:site_name" content="{{ site.Title }}" />
+<meta
+  property="og:description"
+  content="{{ or .Params.description site.Params.description }}"
+/>
+<meta
+  name="twitter:card"
+  content="{{ fmt.Printf `%s/%s` $baseURL site.Params.image }}"
+/>
+<meta name="twitter:image:alt" content="{{ or .Title site.Title }}" />
+
+<!-- font -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu+Mono&display=swap"
+  rel="stylesheet"
+/>
+
+<!-- favicon -->
+<link rel="icon" type="image/png" href="/favicon.png" />
+
+<!-- css -->
+{{- with resources.Get "css/tailwind.css" }}
+  {{- if eq hugo.Environment "development" }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}" />
+  {{- else }}
+    {{- with . | minify | fingerprint }}
+      <link
+        rel="stylesheet"
+        href="{{ .RelPermalink }}"
+        integrity="{{ .Data.Integrity }}"
+        crossorigin="anonymous"
+      />
+    {{- end }}
+  {{- end }}
+{{- end }}
