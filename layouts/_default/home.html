@@ -1,13 +1,3 @@
-{{ define "head" }}
-  <style>
-    @media (min-width: 1024px) {
-      .diagonal-cut {
-        background-image: -webkit-linear-gradient(30deg, #fff 50%, #abc3d6 50%);
-      }
-    }
-  </style>
-{{ end }}
-
 {{ define "main" }}
   <!-- nav (<lg) -->
   <header class="lg:hidden">
@@ -27,7 +17,7 @@
 
   <!-- hero -->
   <section
-    class="diagonal-cut flex h-screen flex-col justify-center lg:justify-between"
+    class="lg:bg-diagonal-cut flex h-screen flex-col justify-center from-base-100 from-50% to-primary to-50% lg:justify-between"
   >
     <!-- nav (>=lg) -->
     <header class="hidden lg:block">

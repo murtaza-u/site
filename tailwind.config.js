@@ -4,6 +4,12 @@ export const theme = {
   fontFamily: {
     sans: ['Roboto', 'sans-serif'],
     mono: ['Ubuntu Mono', 'monospace']
+  },
+  extend: {
+    backgroundImage: {
+      'diagonal-cut':
+        '-webkit-linear-gradient(30deg, var(--tw-gradient-stops));'
+    }
   }
 }
 export const plugins = [require('daisyui')]
@@ -12,7 +18,7 @@ export const daisyui = {
     {
       light: {
         ...require('daisyui/src/theming/themes')['light'],
-        primary: '#5f3dc4',
+        primary: '#abc3d6',
         'primary-content': 'white',
         secondary: '#1864ab',
         'secondary-content': 'white',
@@ -22,6 +28,7 @@ export const daisyui = {
         '--rounded-btn': '0.5rem',
         '--rounded-box': '0.5rem'
       }
-    }
+    },
+    'black'
   ]
 }

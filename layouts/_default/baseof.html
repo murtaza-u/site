@@ -1,5 +1,12 @@
 <!doctype html>
-<html lang="{{ or site.Language.LanguageCode site.Language.Lang }}">
+{{ if .IsHome }}
+  <html
+    lang="{{ or site.Language.LanguageCode site.Language.Lang }}"
+    data-theme="light"
+  >
+{{ else }}
+  <html lang="{{ or site.Language.LanguageCode site.Language.Lang }}">
+{{ end }}
   <head>
     {{ partial "head.html" . }}
     {{ block "head" . }}{{ end }}
