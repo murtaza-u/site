@@ -1,0 +1,25 @@
+{{ define "main" }}
+  <main class="mx-auto my-5 min-h-screen space-y-3 px-3 lg:w-3/5 lg:px-0">
+    <h1 class="text-5xl font-bold tracking-wide">{{ .Title | title }}</h1>
+    <hr />
+    <!-- <p> -->
+    <!--   Interested in staying updated on new posts? Subscribe to my -->
+    <!--   <a class="link link-accent" href="/rss.xml">RSS Feed!</a> -->
+    <!-- </p> -->
+    <ul class="ml-4 list-outside list-disc text-lg">
+      {{ range .Pages }}
+        <li>
+          <time
+            datetime="{{ .Date | time.Format "2006-01-02T15:04:05-07:00" }}"
+          >
+            {{ .Date | time.Format "Jan 02, 2006" }}
+          </time>
+          -
+          <a class="link link-accent" href="{{ .RelPermalink }}">
+            {{ .LinkTitle }}
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+  </main>
+{{ end }}

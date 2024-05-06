@@ -29,6 +29,5 @@ export const daisyui = {
         '--rounded-box': '0.5rem'
       }
     },
-    'black'
   ]
 }

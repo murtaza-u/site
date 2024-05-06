@@ -3,7 +3,7 @@
     <li>
       <a
         href="/"
-        {{ if or (eq .Path "/") (eq .Path "") }}
+        {{ if or (eq .RelPermalink "/") (eq .RelPermalink "") }}
           class="py-1 border-y-2 border-primary"
         {{ else }}
           class="py-1"
@@ -13,7 +13,50 @@
       </a>
     </li>
     <li>
-      <a href="https://blog.murtazau.xyz" target="_blank">Blog</a>
+      <a
+        href="/blog"
+        {{ if or (eq .RelPermalink "/blog") (eq .RelPermalink "/blog/") }}
+          class="py-1 border-y-2 border-primary"
+        {{ else }}
+          class="py-1"
+        {{ end }}
+      >
+        Blog
+      </a>
     </li>
+  </ul>
+  <ul class="space-x-4 px-2">
+    {{- with resources.Get "icon/github-24x.svg" }}
+      <li>
+        <a class="py-1" href="https://github.com/murtaza-u" target="_blank">
+          <img src="{{ .Permalink }}" alt="GitHub" />
+        </a>
+      </li>
+    {{- end }}
+    {{- with resources.Get "icon/mastodon-24x.svg" }}
+      <li>
+        <a class="py-1" href="https://hachyderm.io/@murtaza" target="_blank">
+          <img src="{{ .Permalink }}" alt="Mastodon" />
+        </a>
+      </li>
+    {{- end }}
+    {{- with resources.Get "icon/twitter-24x.svg" }}
+      <li>
+        <a class="py-1" href="https://twitter.com/murtaza_u_" target="_blank">
+          <img src="{{ .Permalink }}" alt="Twitter" />
+        </a>
+      </li>
+    {{- end }}
+    {{- with resources.Get "icon/linkedin-24x.svg" }}
+      <li>
+        <a
+          class="py-1"
+          href="https://linkedin.com/in/murtaza-u"
+          target="_blank"
+        >
+          <img src="{{ .Permalink }}" alt="Linkedin" />
+        </a>
+      </li>
+    {{- end }}
   </ul>
 </nav>

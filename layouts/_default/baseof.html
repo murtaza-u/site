@@ -9,7 +9,6 @@
 {{ end }}
   <head>
     {{ partial "head.html" . }}
-    {{ block "head" . }}{{ end }}
   </head>
   <body class="font-sans">
     {{ if not .IsHome }}
@@ -20,5 +19,10 @@
       </header>
     {{ end }}
     {{ block "main" . }}{{ end }}
+    {{ if not .IsHome }}
+      <footer class="footer footer-center bg-base-300 p-4 text-base-content">
+        {{ partial "footer.html" . }}
+      </footer>
+    {{ end }}
   </body>
 </html>
