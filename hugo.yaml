@@ -1,6 +1,7 @@
 baseURL: https://murtazau.xyz
 languageCode: en-us
 title: Murtaza Udaipurwala
+copyright: © 2023-present CC BY 4.0
 params:
   description: Architecting resilient systems for uninterrupted digital experiences.
   image: murtaza-udaipurwala.jpg
@@ -8,3 +9,7 @@ markup:
   highlight:
     noclasses: false
     tabWidth: 4
+outputFormats:
+  RSS:
+    mediaType: application/rss+xml
+    baseName: rss
