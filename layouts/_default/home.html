@@ -44,6 +44,13 @@
         MURTAZA UDAIPURWALA
       </h1>
       <ul class="flex justify-center space-x-4 px-2">
+        {{- with resources.Get "icon/email-28x.svg" }}
+          <li>
+            <a class="py-1" href="mailto:murtaza@murtazau.xyz" target="_blank">
+              <img src="{{ .Permalink }}" alt="E-Mail" />
+            </a>
+          </li>
+        {{- end }}
         {{- with resources.Get "icon/github-28x.svg" }}
           <li>
             <a class="py-1" href="https://github.com/murtaza-u" target="_blank">
