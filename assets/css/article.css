@@ -68,3 +68,12 @@ article pre {
 article img {
   margin: 0.5rem 0;
 }
+
+article blockquote {
+  background-color: #e5e6e6;
+  padding: 1rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  border-left: 6px solid black;
+  font-style: italic;
+  margin: 0.5rem 0;
+}
