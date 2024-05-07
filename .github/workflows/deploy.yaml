@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
 
     # Allows you to run this workflow manually from the Actions tab
     workflow_dispatch:
@@ -23,7 +23,7 @@ jobs:
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v3.0
         env:
-          NETLIFY_AUTH_TOKEN: ${{  secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         with:
           publish-dir: ./public

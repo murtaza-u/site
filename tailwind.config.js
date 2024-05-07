@@ -28,6 +28,6 @@ export const daisyui = {
         '--rounded-btn': '0.5rem',
         '--rounded-box': '0.5rem'
       }
-    },
+    }
   ]
 }

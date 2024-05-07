@@ -1,12 +1,5 @@
 <!doctype html>
-{{ if .IsHome }}
-  <html
-    lang="{{ or site.Language.LanguageCode site.Language.Lang }}"
-    data-theme="light"
-  >
-{{ else }}
-  <html lang="{{ or site.Language.LanguageCode site.Language.Lang }}">
-{{ end }}
+<html lang="{{ or site.Language.LanguageCode site.Language.Lang }}">
   <head>
     {{ partial "head.html" . }}
   </head>

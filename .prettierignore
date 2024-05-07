@@ -5,4 +5,5 @@ yarn.lock
 .direnv
 flake.lock
 /assets/css/tailwind.css
+/assets/css/syntax.css
 *.md
