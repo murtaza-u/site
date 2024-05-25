@@ -13,7 +13,7 @@ article ol {
 }
 
 article li {
-  margin: 1rem 0 0 0;
+  margin: 0.4rem 0 0 0;
 }
 
 article h1,
@@ -60,13 +60,13 @@ article pre {
   border-radius: 0.5rem;
 }
 
-::-webkit-scrollbar {
+article ::-webkit-scrollbar {
   width: 0px;
   background: transparent; /* make scrollbar transparent */
 }
 
 article img {
-  margin: 0.5rem 0;
+  margin: 0.5rem auto;
 }
 
 article blockquote {
@@ -76,4 +76,12 @@ article blockquote {
   border-left: 6px solid black;
   font-style: italic;
   margin: 0.5rem 0;
+}
+
+article a {
+  color: #0000ff;
+}
+
+article a:hover {
+  text-decoration: underline;
 }
