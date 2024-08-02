@@ -21,6 +21,7 @@
             nodePackages.typescript-language-server
             prettierd
             tailwindcss-language-server
+            emmet-language-server
             netlify-cli
             hugo
           ];
