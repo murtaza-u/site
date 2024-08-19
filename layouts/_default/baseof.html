@@ -2,6 +2,8 @@
 <html lang="{{ or site.Language.LanguageCode site.Language.Lang }}">
   <head>
     {{ partial "head.html" . }}
+    <!-- umami analytics -->
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="c5daf481-a19e-4e16-89b5-67f08805eb42"></script>
   </head>
   <body class="font-sans">
     {{ if not .IsHome }}
