@@ -2,9 +2,12 @@
   <main class="mx-auto my-5 min-h-screen space-y-3 px-3 lg:w-3/5 lg:px-0">
     <h1 class="text-5xl font-bold tracking-wide">{{ .Title | title }}</h1>
     <p>
-      Interested in staying updated on new posts? Subscribe to my
+      Interested in staying updated? Subscribe to my
       <a class="link link-accent" href="/rss.xml">RSS Feed!</a>
     </p>
+    <section>
+      {{ .Content }}
+    </section>
     <hr />
     <ul class="ml-4 list-outside list-disc text-lg">
       {{ range .Pages }}

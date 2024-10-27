@@ -24,6 +24,18 @@
         Blog
       </a>
     </li>
+    <li>
+      <a
+        href="/thoughts"
+        {{ if or (eq .RelPermalink "/thoughts") (eq .RelPermalink "/thoughts/") }}
+          class="py-1 border-y-2 border-primary"
+        {{ else }}
+          class="py-1"
+        {{ end }}
+      >
+        Thoughts
+      </a>
+    </li>
   </ul>
   <ul class="space-x-4 px-2">
     {{- with resources.Get "icon/github-24x.svg" }}
