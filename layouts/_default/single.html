@@ -11,8 +11,8 @@
     <article class="text-lg">
       {{ .Content }}
     </article>
-    <hr />
     {{ with .GetTerms "tags" }}
+      <hr />
       <ul class="flex flex-wrap">
         {{ range . }}
           <li class="m-1">
