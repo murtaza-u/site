@@ -24,6 +24,11 @@
             emmet-language-server
             netlify-cli
             hugo
+            markdownlint-cli
+            cbfmt
+            shfmt
+            mdformat
+            python312Packages.mdformat-frontmatter
           ];
         };
       });

@@ -1,0 +1,4 @@
+[languages]
+bash = ["shfmt"]
+sh = ["shfmt"]
+terraform = [ "terraform fmt" ]
