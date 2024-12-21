@@ -62,7 +62,8 @@ article pre {
 
 article ::-webkit-scrollbar {
   width: 0px;
-  background: transparent; /* make scrollbar transparent */
+  background: transparent;
+  /* make scrollbar transparent */
 }
 
 article img {
@@ -84,4 +85,34 @@ article a {
 
 article a:hover {
   text-decoration: underline;
+}
+
+article table {
+  text-align: left;
+  width: 100%;
+  margin: 0.5rem 0;
+  font-size: .8em;
+
+  tr:nth-child(even) {
+    background-color: #f6f8fa;
+  }
+
+  thead {
+    background-color: black;
+    color: white;
+  }
+
+  td,
+  th {
+    padding: 0.5rem;
+  }
+}
+
+
+article table,
+article th,
+article td {
+  border: .5px solid black;
+  border-collapse: collapse;
+  white-space: nowrap;
 }
