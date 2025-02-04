@@ -11,7 +11,7 @@ tags:
   - homelab
 ---
 
-![](/homelab-on-a-shoestring-bootstrapping-fluxcd.webp)
+![](homelab-on-a-shoestring-bootstrapping-fluxcd.webp)
 
 ## Tainting `srv-onprem-0`
 

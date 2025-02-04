@@ -4,11 +4,11 @@ date: 2024-02-24T11:59:50+05:30
 description: Debunking mysterious OpenSSL commands
 ogImage: self-signed-x509-certificates.png
 tags:
-    - cryptography
-    - security
+  - cryptography
+  - security
 ---
 
-![Overview of self-signed certificates](/self-signed-x509-certificates.png)
+![Overview of self-signed certificates](self-signed-x509-certificates.png)
 
 ## Certificate Authority (CA)
 
@@ -29,17 +29,17 @@ openssl req \
 
 Now, let's dissect the command above:
 
-* `req`: Used to generate a certificate signing request (CSR).
-* `-x509`: Tells OpenSSL to generate a certificate directly instead of a
+- `req`: Used to generate a certificate signing request (CSR).
+- `-x509`: Tells OpenSSL to generate a certificate directly instead of a
   CSR.
-* `-newkey rsa:4096`: Generates a new RSA key pair with a key length of
+- `-newkey rsa:4096`: Generates a new RSA key pair with a key length of
   4096 bits.
-* `-days 365`: Expires the certificate after 365 days.
-* `-nodes`: Stands for no DES (Data Encryption Standard), tells OpenSSL
+- `-days 365`: Expires the certificate after 365 days.
+- `-nodes`: Stands for no DES (Data Encryption Standard), tells OpenSSL
   not to encrypt the private key. By default, OpenSSL encrypts the
   private key with a passphrase.
-* `-keyout`: Specifies the destination of the private key file.
-* `-out`: Specifies the destination of the certificate file.
+- `-keyout`: Specifies the destination of the private key file.
+- `-out`: Specifies the destination of the certificate file.
 
 You'll be prompted to fill out a few options. Enter '.' to leave the
 field blank. Typically, I fill out the organization name (O), common
@@ -122,13 +122,13 @@ openssl x509 \
 
 Let's dissect this command:
 
-* `x509`: Tells OpenSSL that we want to generate an X.509 certificate.
-* `-req -in`: Specifies that the input file is a CSR
+- `x509`: Tells OpenSSL that we want to generate an X.509 certificate.
+- `-req -in`: Specifies that the input file is a CSR
   (`service1/req.pem`).
-* `-days 90`: Expires the certificate after 90 days.
-* `-CA`: Path to CA's certificate.
-* `-CAkey`: Path to CA's private key.
-* `-out`: Specifies the destination of the certificate file.
+- `-days 90`: Expires the certificate after 90 days.
+- `-CA`: Path to CA's certificate.
+- `-CAkey`: Path to CA's private key.
+- `-out`: Specifies the destination of the certificate file.
 
 Our self-signed certificate for Service 1 is now ready.
 
@@ -160,10 +160,10 @@ openssl req \
 
 Let's break down the above command:
 
-* `req -new`: Implies that we are generating a new CSR.
-* `-key`: Path to the private key file.
-* `-out`: Specifies the destination of the CSR file (`ca/req.pem`).
-* `-subj`: Used to attach metadata to the CSR.
+- `req -new`: Implies that we are generating a new CSR.
+- `-key`: Path to the private key file.
+- `-out`: Specifies the destination of the CSR file (`ca/req.pem`).
+- `-subj`: Used to attach metadata to the CSR.
 
 The command generates a new CSR at `ca/req.pem`.
 
@@ -207,13 +207,13 @@ openssl x509 \
 
 ## Key points
 
-* To analyze any certificate, run:
+- To analyze any certificate, run:
 
 ```plaintext
 openssl x509 -in path_to_certificate.pem -noout -text
 ```
 
-* Every certificate should have an expiry.
-* Certificates needs to be renewed once they expire.
-* A certificate signing request (CSR) needs to be made to the CA to
+- Every certificate should have an expiry.
+- Certificates needs to be renewed once they expire.
+- A certificate signing request (CSR) needs to be made to the CA to
   generate a signed certificate.

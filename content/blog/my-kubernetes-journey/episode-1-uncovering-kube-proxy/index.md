@@ -1,28 +1,28 @@
 ---
-title: "My Kubernetes Journey - Episode 1: Uncovering Kube-Proxy"
+title: 'My Kubernetes Journey - Episode 1: Uncovering Kube-Proxy'
 date: 2024-06-11T18:21:27+05:30
 description: |
-    How does Kubernetes distributes traffic across pods on different
-    nodes?
+  How does Kubernetes distributes traffic across pods on different
+  nodes?
 ogImage: kubernetes-iptables-meme.jpg
 tags:
-    - kubernetes
+  - kubernetes
 ---
 
-![Kubernetes iptables meme](/kubernetes-iptables-meme.jpg)
+![Kubernetes iptables meme](kubernetes-iptables-meme.jpg)
 
 ## Background
 
-* Whenever you create pods, Kubernetes assigns each pod an IP address
+- Whenever you create pods, Kubernetes assigns each pod an IP address
   from the pod CIDR. These IP addresses are ephemeral and can change
   when a pod is deleted or replaced by a new one.
-* To solve this problem, Kubernetes lets you create a Service. Each
+- To solve this problem, Kubernetes lets you create a Service. Each
   Service is assigned a persistent IP address, from the service CIDR. A
   Service keeps track of the pod IP addresses (using an EndpointSlice)
   that match its label selector.
-* Other pods in the cluster, regardless of what node they are on, can
+- Other pods in the cluster, regardless of what node they are on, can
   communicate with our pods using the Service IP.
-* It is said that the Service distributes traffic across your pods. But
+- It is said that the Service distributes traffic across your pods. But
   does it really do that?
 
 ## Diving deeper
@@ -32,7 +32,7 @@ traffic across our pods. `Kube-Proxy` is a daemon running on every
 worker node, listening for changes to the Service and EndpointSlice
 objects via the `kube-apiserver`.
 
-![Pod to pod communication](/pod-to-pod-communication-through-service.png)
+![Pod to pod communication](pod-to-pod-communication-through-service.png)
 
 That's all well and good, but it still doesn't answer our question:
 *When I make a call to a service IP, how does the network packet route
@@ -57,8 +57,8 @@ $ sudo virsh net-dhcp-leases default
  2024-06-12 21:18:12   52:54:00:a1:ec:9d   ipv4       192.168.122.34/24    vm-1       ff:00:a1:ec:9d:00:01:00:01:2d:f8:ab:17:52:54:00:ef:6c:aa
 ```
 
-* `vm-1`(192.168.122.34) has iptables installed.
-* `vm-2`(192.168.122.179) has nginx web server installed and is serving a
+- `vm-1`(192.168.122.34) has iptables installed.
+- `vm-2`(192.168.122.179) has nginx web server installed and is serving a
   static web page on port 80.
 
 We can access the webpage on `vm-2` from our host:
@@ -90,22 +90,22 @@ We'll use `iptables` to route the incoming traffic on `vm-1` to `vm-2`.
 
 ```sh
 murtaza@vm-1:~$ sudo iptables \
-    --table nat \
-    --append PREROUTING \
-    --protocol tcp \
-    --destination 192.168.122.34 \
-    --dport 80 \
-    --jump DNAT \
-    --to-destination 192.168.122.179:80
+	--table nat \
+	--append PREROUTING \
+	--protocol tcp \
+	--destination 192.168.122.34 \
+	--dport 80 \
+	--jump DNAT \
+	--to-destination 192.168.122.179:80
 
 murtaza@vm-1:~$ sudo iptables \
-    --table nat \
-    --append POSTROUTING \
-    --protocol tcp \
-    --destination 192.168.122.179 \
-    --dport 80 \
-    --jump SNAT \
-    --to-source 192.168.122.34
+	--table nat \
+	--append POSTROUTING \
+	--protocol tcp \
+	--destination 192.168.122.179 \
+	--dport 80 \
+	--jump SNAT \
+	--to-source 192.168.122.34
 ```
 
 To list the 2 rules we just created, run:
@@ -114,7 +114,7 @@ To list the 2 rules we just created, run:
 murtaza@vm-1:~$ sudo iptables --table nat --list
 ```
 
-![Routing using iptables](/iptables-routing-dnat-snat.png)
+![Routing using iptables](iptables-routing-dnat-snat.png)
 
 By default, Linux won't allow you to forward IP packets from `vm-1` to
 `vm-2`. To enable it, run the following on `vm-1`:

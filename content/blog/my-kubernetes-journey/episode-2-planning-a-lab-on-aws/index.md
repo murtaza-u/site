@@ -1,13 +1,13 @@
 ---
-title: "My Kubernetes Journey - Episode 2: Planning a homelab on AWS & K3S"
+title: 'My Kubernetes Journey - Episode 2: Planning a homelab on AWS & K3S'
 date: 2024-08-02T12:42:48+05:30
 description: It's time! I'm building a homelab, but in the cloud.
 ogImage: technologies-for-aws-lab.jpg
 tags:
-    - kubernetes
+  - kubernetes
 ---
 
-![Lab technologies](/technologies-for-aws-lab.jpg)
+![Lab technologies](technologies-for-aws-lab.jpg)
 
 ## Backstory
 
@@ -36,7 +36,7 @@ instance. The AWS cost calculator estimates the monthly bill with 100%
 usage and 30 GB of EBS (gp3) volume to be around 19 USD (~1600 INR),
 excluding taxes.
 
-![AWS cost estimation](/homelab-aws-cost-estimation.png)
+![AWS cost estimation](homelab-aws-cost-estimation.png)
 
 I could reduce the price to around 14 USD/month by opting for the EC2
 savings plan and reserving the instance for 1 year. However, since I'm
@@ -85,9 +85,9 @@ observability using [Prometheus](https://prometheus.io), and perhaps
 install a service mesh like [Istio](https://istio.io). Here is a list of things I want to
 set up in the coming week on my single-node K3S cluster:
 
-* [ArgoCD](https://argo-cd.readthedocs.io/en/stable/)
-* Prometheus and [Grafana](https://grafana.com)
-* [Authelia](https://www.authelia.com) as an IdP for Kubernetes and other services
-* [Synapse](https://element-hq.github.io/synapse/latest/) (Matrix server)
-* Minecraft server
-* Migrate my projects from the old server to the new one
+- [ArgoCD](https://argo-cd.readthedocs.io/en/stable/)
+- Prometheus and [Grafana](https://grafana.com)
+- [Authelia](https://www.authelia.com) as an IdP for Kubernetes and other services
+- [Synapse](https://element-hq.github.io/synapse/latest/) (Matrix server)
+- Minecraft server
+- Migrate my projects from the old server to the new one

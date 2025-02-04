@@ -12,7 +12,7 @@ tags:
   - tailscale
 ---
 
-![Tailscale VPN + K3S](/homelab-on-a-shoestring-tailscale-vpn-k3s-cluster.webp)
+![Tailscale VPN + K3S](homelab-on-a-shoestring-tailscale-vpn-k3s-cluster.webp)
 
 My first goal is to enable `srv-cloud-0` (EC2 instance) and `srv-onprem-0`
 (laptop repurposed as a server) to talk with each other. However, since
@@ -133,7 +133,7 @@ keys. So, all I had to do was copy the SSH private key (used for decrypting
 secrets) to the hosts, specify the file path in my Nix config, and sops-nix
 would take care of the rest.
 
-![Tailscale connected devices](/tailscale-connected-devices.png)
+![Tailscale connected devices](tailscale-connected-devices.png)
 
 ## Building a k3s cluster
 

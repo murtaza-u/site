@@ -11,7 +11,7 @@ tags:
   - nixos
 ---
 
-![Overly exaggerated AI-generated cover image](/homelab-on-a-shoestring.webp)
+![Overly exaggerated AI-generated cover image](homelab-on-a-shoestring.webp)
 
 This marks the very re-beginning of my homelab journey. I don't have much to
 start with - just an old, dusty laptop repurposed as a server and a VPS on AWS
@@ -238,7 +238,7 @@ decade old by now. It has a quad-core CPU, 4GB of memory, and 256GB of
 storage. I’ve configured my router’s DHCP settings to always assign it the IP
 address `192.168.29.05`.
 
-![Old Sony laptop](/old-sony-laptop.webp)
+![Old Sony laptop](old-sony-laptop.webp)
 
 I've already installed and configured NixOS on it. The configuration is very
 similar to our `srv-cloud-0` host. For brevity, I’ll only mention the changed

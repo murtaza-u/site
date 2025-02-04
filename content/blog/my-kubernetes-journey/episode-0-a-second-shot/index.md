@@ -1,13 +1,13 @@
 ---
-title: "My Kubernetes Journey - Episode 0: A Second Shot"
+title: 'My Kubernetes Journey - Episode 0: A Second Shot'
 date: 2024-05-24T12:06:09+05:30
-description: "(Re)Starting my journey into Kubernetes."
+description: (Re)Starting my journey into Kubernetes.
 ogImage: kubernetes-with-gophers.jpg
 tags:
-    - kubernetes
+  - kubernetes
 ---
 
-![Kubernetes with Gophers](/kubernetes-with-gophers.jpg)
+![Kubernetes with Gophers](kubernetes-with-gophers.jpg)
 
 > **Disclaimer**: The information provided in this series may not be
 > 100% accurate and may be unstructured. This is not a tutorial series;
@@ -33,7 +33,7 @@ There are two reasons:
    NGINX ingress, cert-manager, and CI/CD with GitHub Actions. This
    reignited my motivation to re-learn Kubernetes, in deeper detail this
    time.
-2. It's May 2024, and I have just graduated from college. My biggest
+1. It's May 2024, and I have just graduated from college. My biggest
    priority now is getting a job in tech. Kubernetes has exploded in
    popularity and is used by many companies. As a result, there are jobs
    offering good packages for Kubernetes engineers.
@@ -54,22 +54,22 @@ representations whenever needed or possible.
 
 ### Kubernetes Architecture
 
-![Kubernetes architecture](/broad-kubernetes-architecture.png)
+![Kubernetes architecture](broad-kubernetes-architecture.png)
 
-* Broadly, Kubernetes' architecture consists of control plane nodes and
+- Broadly, Kubernetes' architecture consists of control plane nodes and
   worker nodes.
-* All the nodes in the cluster run processes called `kubelet` and
+- All the nodes in the cluster run processes called `kubelet` and
   `kube-proxy`, as well as a container runtime.
 
 ### Container Runtime
 
-* The most popular container runtime is `containerd`, which originated
+- The most popular container runtime is `containerd`, which originated
   from the Docker project when the Docker team decided to separate the
   runtime from the Docker tool.
-* I remember experimenting with `CRI-O` two years ago when I was
+- I remember experimenting with `CRI-O` two years ago when I was
   deploying a Kubernetes cluster on my Raspberry Pis using an official
   tool called `kubeadm`.
-* All in all, the container runtime you use shouldn't really matter in
+- All in all, the container runtime you use shouldn't really matter in
   terms of actual usage, as all of them are OCI (Open Containers
   Initiative) compliant.
 
@@ -80,154 +80,154 @@ balance traffic across nodes.
 
 ### Kubelet
 
-* This is a daemon process that runs on every node in the cluster,
+- This is a daemon process that runs on every node in the cluster,
   including the control-plane nodes.
-* The API server communicates what needs to be done to the `Kubelet`.
+- The API server communicates what needs to be done to the `Kubelet`.
   The `Kubelet` is then responsible for conveying these instructions to
   the container runtime.
-* Additionally, the `Kubelet` monitors the status of the node and
+- Additionally, the `Kubelet` monitors the status of the node and
   containers and communicates this information back to the API server.
 
 ### Worker Nodes
 
-* These are physical computers or VMs that run your applications.
-* The `scheduler` (part of the control-plane) schedules pods to these
+- These are physical computers or VMs that run your applications.
+- The `scheduler` (part of the control-plane) schedules pods to these
   nodes.
-* Each worker node can be assigned labels, which the scheduler can use
+- Each worker node can be assigned labels, which the scheduler can use
   to limit which nodes a particular group of pods can be deployed to, a
   property called `nodeAffinity`.
 
 ### Control-Plane
 
-* This node is responsible for all cluster operations.
-* In addition to the `kubelet`, `kube-proxy`, and the container runtime,
+- This node is responsible for all cluster operations.
+- In addition to the `kubelet`, `kube-proxy`, and the container runtime,
   the control-plane also houses the `scheduler`, `controller manager`,
   and a key-value distributed database called `Etcd`.
-* Recently, I have heard that it possible for the control-plane to run
+- Recently, I have heard that it possible for the control-plane to run
   application workloads, although it is advised against doing so in
   production.
 
 #### Scheduler
 
-* As discussed above, the scheduler schedules pods to worker nodes. In
+- As discussed above, the scheduler schedules pods to worker nodes. In
   other words, the scheduler decides where pods needs to be deployed in
   the cluster.
-* I would like to know more about the underlying scheduling algorithm it
+- I would like to know more about the underlying scheduling algorithm it
   uses.
 
 #### Controller Manager
 
-* The controller manager's job is to spawn controllers like
+- The controller manager's job is to spawn controllers like
   `deployments`, `statefulsets`, and `replicasets`. These controllers
   watch for changes to their respective manifests using `Etcd's`
   watching ability.
-* When a change occurs, such as modifying a deployment's YAML file, the
+- When a change occurs, such as modifying a deployment's YAML file, the
   controller picks it up and communicates with the `kubelet` via the API
   server to converge to the desired state.
 
 #### Etcd
 
-* Often referred to as the brain of Kubernetes.
-* It is a key-value, non-hierarchical database.
-* It is distributed and uses the Raft consensus algorithm.
-* It provides clients the ability to watch keys and receive updates in
+- Often referred to as the brain of Kubernetes.
+- It is a key-value, non-hierarchical database.
+- It is distributed and uses the Raft consensus algorithm.
+- It provides clients the ability to watch keys and receive updates in
   the form of events when a key is added, modified, or deleted. This
   ability forms the basis of Kubernetes'
   convergence-to-the-desired-state model.
-* It is advised to always have an odd number of control-plane nodes (and
+- It is advised to always have an odd number of control-plane nodes (and
   thus an odd number of Etcd databases, one on each node).
 
 ### Kubernetes Objects
 
 #### Pod
 
-* Atomic unit in Kubernetes.
-* Houses one (usually) or more containers (sidecar containers).
-* Pods are replaceable. If a pod becomes unhealthy or crashes, the
+- Atomic unit in Kubernetes.
+- Houses one (usually) or more containers (sidecar containers).
+- Pods are replaceable. If a pod becomes unhealthy or crashes, the
   replicaset replaces it with a new one.
-* An IP address is assigned to each pod by Kubernetes' DNS server
+- An IP address is assigned to each pod by Kubernetes' DNS server
   (CoreDNS). This IP address may change when a pod is destroyed or
   replaced.
 
 #### ReplicaSet
 
-* A level of abstraction on top of pods.
-* It is a controller responsible for maintaining a desired number of pod
+- A level of abstraction on top of pods.
+- It is a controller responsible for maintaining a desired number of pod
   replicas.
 
 #### Deployment
 
-* A level of abstraction on top of replicasets.
-* It provides complex features like auto-scaling, rollbacks, and
+- A level of abstraction on top of replicasets.
+- It provides complex features like auto-scaling, rollbacks, and
   zero-downtime updates. I have very little understanding of how to
   configure these features.
 
-![Containers -> Pods -> ReplicaSet -> Deployment](/kubernetes-containers-pods-replicaset-deployment-hierarchy.jpg)
+![Containers -> Pods -> ReplicaSet -> Deployment](kubernetes-containers-pods-replicaset-deployment-hierarchy.jpg)
 Credits: [@antweiss on X](https://x.com/antweiss/status/1549268282955517953)
 
 #### Service
 
-* A service is an abstraction on top of the `Endpoints` object. I don't
+- A service is an abstraction on top of the `Endpoints` object. I don't
   remember much about the Endpoint object beyond its name.
-* It provides a persistent address to your pods and load balances
+- It provides a persistent address to your pods and load balances
   traffic across them.
-* A service can be of one of 3 types:
+- A service can be of one of 3 types:
   1. **ClusterIP**: Internal to the cluster; not accessible from
      outside.
-  2. **NodePort**: Accessible on a particular port from any worker node.
+  1. **NodePort**: Accessible on a particular port from any worker node.
      **Note**: Firewall rules need to be configured to allow inbound
      traffic on that port.
-  3. **LoadBalancer**: Exposed behind a load balancer. In cloud
+  1. **LoadBalancer**: Exposed behind a load balancer. In cloud
      environments like AWS (EKS), a load balancer is automatically
      assigned when you create the service object.
 
 #### Ingress
 
-* Ingress allows you to route traffic into your cluster using HTTP paths
+- Ingress allows you to route traffic into your cluster using HTTP paths
   and domains.
-* When using ingress, the service object is usually of type `ClusterIP`.
-* Ingress exposes only HTTP and HTTPS traffic behind a single load
+- When using ingress, the service object is usually of type `ClusterIP`.
+- Ingress exposes only HTTP and HTTPS traffic behind a single load
   balancer, unlike a load balancer service type that exposes any
   traffic. This reduces costs, as cloud providers charge for each
   deployed load balancer.
-* Since most services are HTTP services, using ingress can significantly
+- Since most services are HTTP services, using ingress can significantly
   reduce costs.
-* An Ingress Controller manages ingress objects. I remember deploying an
+- An Ingress Controller manages ingress objects. I remember deploying an
   NGINX ingress controller.
 
 #### Secrets
 
-* Used to store confidential and sensitive data in Kubernetes.
-* I have yet to learn how Kubernetes stores this data securely.
-* Secrets can be passed to pods as environment variables or volumes.
+- Used to store confidential and sensitive data in Kubernetes.
+- I have yet to learn how Kubernetes stores this data securely.
+- Secrets can be passed to pods as environment variables or volumes.
 
 #### ConfigMap
 
-* Similar to secrets, but used to store non-confidential data.
+- Similar to secrets, but used to store non-confidential data.
 
 #### Persistent Volume (PV)
 
-* A data store that can be exposed to pods.
-* PVs can be backed by numerous storage options like an NFS share or an
+- A data store that can be exposed to pods.
+- PVs can be backed by numerous storage options like an NFS share or an
   AWS EBS volume.
-* PVs can be dynamically provisioned or reserved in advance.
+- PVs can be dynamically provisioned or reserved in advance.
 
 #### Persistent Volume Claim (PVC)
 
-* A claim issued to the API server to bind to a persistent volume.
-* These claims can be referenced in deployment YAML files to mount the
+- A claim issued to the API server to bind to a persistent volume.
+- These claims can be referenced in deployment YAML files to mount the
   volume into the pod container's file system.
 
 #### Storage Classes
 
-* I have sparse memory about this one. To my understanding, this was a
+- I have sparse memory about this one. To my understanding, this was a
   way to factor away the definition of the underlying storage (NFS, AWS
   EBS, etc.) into a reusable component referenced by PVCs.
 
 #### StatefulSets
 
-* Used to deploy stateful workloads like a database.
-* I have hardly worked with statefulsets in the past. To my knowledge,
+- Used to deploy stateful workloads like a database.
+- I have hardly worked with statefulsets in the past. To my knowledge,
   it performs some persistent volume witchcraft. Each statefulset pod is
   allocated its own PV, which is retained even after the statefulset is
   deleted. Also, statefulset pods are created and deployed by Kubernetes
@@ -235,14 +235,14 @@ Credits: [@antweiss on X](https://x.com/antweiss/status/1549268282955517953)
 
 #### Jobs
 
-* Sometimes you would want to run a one-time task in your Kubernetes
+- Sometimes you would want to run a one-time task in your Kubernetes
   cluster. For example, data processing.
-* Jobs allows you to run one-time finite tasks in your cluster.
+- Jobs allows you to run one-time finite tasks in your cluster.
 
 #### CronJobs
 
-* Like Jobs, but run at regular intervals.
-* The cron syntax is exactly same as that of UNIX systems.
+- Like Jobs, but run at regular intervals.
+- The cron syntax is exactly same as that of UNIX systems.
 
 ### Init Containers
 
@@ -252,18 +252,18 @@ with an exit code of 0.
 
 ### Static Pods
 
-* In Kubernetes, the controller manager, scheduler, API server, and etcd
+- In Kubernetes, the controller manager, scheduler, API server, and etcd
   database all run as pods. However, no pods can start without
   control-plane components, creating a chicken-and-egg problem.
-* The solution to the above problem are static pods. Static pods are
+- The solution to the above problem are static pods. Static pods are
   managed by the kubelet directly. This means that they run independent
   of the control-plane components.
-* During bootstrapping, Kubernetes control plane components are deployed
+- During bootstrapping, Kubernetes control plane components are deployed
   as static pods.
-* Static pods are mirrored to the API server, allowing you to see
+- Static pods are mirrored to the API server, allowing you to see
   control-plane components when listing pods in the `kube-system`
   namespace.
-* I have written a twitter thread on static pods:
+- I have written a twitter thread on static pods:
   [LINK](https://x.com/murtaza_u_/status/1581181854043934720)
 
 ```sh
@@ -274,26 +274,26 @@ kubectl get pods -n kube-system
 
 #### Talos Linux
 
-* Talos (from SideroLabs) is a secure Kubernetes operating system.
-* It lets you interact with your nodes (that have Talos Linux on them)
+- Talos (from SideroLabs) is a secure Kubernetes operating system.
+- It lets you interact with your nodes (that have Talos Linux on them)
   using a gRPC API. Not even an SSH server runs on those nodes.
-* I would likely use Talos if I ever run a homelab Kubernetes cluster.
+- I would likely use Talos if I ever run a homelab Kubernetes cluster.
 
 #### MetalLB
 
-* When running a Kubernetes cluster on metal, you need to set up a load
+- When running a Kubernetes cluster on metal, you need to set up a load
   balancer yourself, unlike in cloud environments where it is
   automatically assigned.
-* I remember installing MetalLB as a minikube addon.
+- I remember installing MetalLB as a minikube addon.
 
 #### Kube VIP
 
-* Kube VIP is another load balancer. I remember using it when I was
+- Kube VIP is another load balancer. I remember using it when I was
   [deploying a HA cluster on-metal](https://x.com/murtaza_u_/status/1580454841943752704).
-* Kube VIP provides both a load balancer for services and a high
+- Kube VIP provides both a load balancer for services and a high
   availability virtual IP that load balances across all control-plane
   nodes.
-* I don't remember why I chose Kube VIP over MetalLB.
+- I don't remember why I chose Kube VIP over MetalLB.
 
 > Could MetalLB not be used for a high-availability cluster to load
 > balance traffic to the control-plane nodes ??

@@ -4,20 +4,20 @@ date: 2024-01-07T11:10:15+05:30
 description: Born out of excuses of a back-end developer
 ogImage: setting-up-go-templ-tailwind-htmx.png
 tags:
-    - go
-    - htmx
+  - go
+  - htmx
 ---
 
-![Go Templ + HTMX + TailwindCSS](/setting-up-go-templ-tailwind-htmx.png)
+![Go Templ + HTMX + TailwindCSS](setting-up-go-templ-tailwind-htmx.png)
 
 The goal of this article is to set up a project template with the
 following features:
 
-* Set up TEMPL
-* Set up Tailwind CSS
-* Set up HTMX
-* Automatically rebuild CSS (Tailwind)
-* Live reload Go application on change using Air
+- Set up TEMPL
+- Set up Tailwind CSS
+- Set up HTMX
+- Automatically rebuild CSS (Tailwind)
+- Live reload Go application on change using Air
 
 This article assumes that you have Go, TEMPL, npm, and Air installed in
 your PATH.
@@ -223,7 +223,7 @@ File: `package.json`
 
 ## Result
 
-![](/setting-up-go-templ-tailwind-htmx-result.gif)
+![](setting-up-go-templ-tailwind-htmx-result.gif)
 
 We have successfully set up a project with TEMPL, HTMX, and Tailwind CSS
 and configured Tailwind to automatically rebuild the stylesheet.
@@ -279,4 +279,4 @@ air
 
 ## Ending
 
-![](/setting-up-go-templ-tailwind-htmx-ending.gif)
+![](setting-up-go-templ-tailwind-htmx-ending.gif)

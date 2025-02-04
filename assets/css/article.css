@@ -91,7 +91,7 @@ article table {
   text-align: left;
   width: 100%;
   margin: 0.5rem 0;
-  font-size: .8em;
+  font-size: 0.8em;
 
   tr:nth-child(even) {
     background-color: #f6f8fa;
@@ -108,11 +108,10 @@ article table {
   }
 }
 
-
 article table,
 article th,
 article td {
-  border: .5px solid black;
+  border: 0.5px solid black;
   border-collapse: collapse;
   white-space: nowrap;
 }

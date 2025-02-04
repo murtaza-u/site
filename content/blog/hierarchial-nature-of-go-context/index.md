@@ -4,10 +4,10 @@ date: 2024-06-07T22:20:23+05:30
 description: Learn why the context package in Go is so powerful
 ogImage: golang-gopher-looking-at-context.png
 tags:
-    - go
+  - go
 ---
 
-![Gopher looking at context](/golang-gopher-looking-at-context.png)
+![Gopher looking at context](golang-gopher-looking-at-context.png)
 
 `Context` is one of the most powerful constructs in Go, and this power
 originates from its hierarchical nature. As you know, whenever you
@@ -102,4 +102,4 @@ the context passed to the children. This resulted in the cancellation of
 the child goroutines and their subsequent exit. After this, the
 concerned parent would re-spawn new children.
 
-![Mind Blowing](/mind-blown-meme.jpg)
+![Mind Blowing](mind-blown-meme.jpg)
