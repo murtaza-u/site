@@ -1,8 +1,8 @@
 ---
-title: {{ replace .File.ContentBaseName "-" " " | title }}
-date: {{ .Date }}
+title: {{replace .File.ContentBaseName "-" " " | title: null}: null}
+date: {{.Date: null}: null}
 tags:
-    - go
-    - kubernetes
+  - go
+  - kubernetes
 draft: true
 ---

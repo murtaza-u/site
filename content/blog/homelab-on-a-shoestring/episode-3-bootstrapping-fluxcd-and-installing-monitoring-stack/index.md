@@ -5,7 +5,7 @@ date: 2024-12-24T20:14:24+05:30
 description: |-
   This post goes over how I bootstrapped FluxCD, a popular GitOps tool, using
   Terraform on my K3s Kubernetes cluster.
-ogImage: homelab-on-a-shoestring-bootstrapping-fluxcd.webp
+ogImage: /blog/homelab-on-a-shoestring/episode-3-bootstrapping-fluxcd-and-installing-monitoring-stack/homelab-on-a-shoestring-bootstrapping-fluxcd.webp
 tags:
   - kubernetes
   - homelab
