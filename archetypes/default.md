@@ -1,6 +1,6 @@
 ---
-title: {{replace .File.ContentBaseName "-" " " | title: null}: null}
-date: {{.Date: null}: null}
+title: {{ replace .File.ContentBaseName "-" " " | title }}
+date: {{ .Date }}
 description: One liner for the article
 ogImage: myimage.png
 tags:

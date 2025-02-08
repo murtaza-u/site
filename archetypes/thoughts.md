@@ -1,6 +1,6 @@
 ---
-title: {{replace .File.ContentBaseName "-" " " | title: null}: null}
-date: {{.Date: null}: null}
+title: {{ replace .File.ContentBaseName "-" " " | title }}
+date: {{ .Date }}
 tags:
   - go
   - kubernetes
