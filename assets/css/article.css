@@ -1,3 +1,19 @@
+:root {
+  --blockquoute-bg-color: #e5e6e6;
+  --blockquoute-left-bar-color: black;
+  --link-text-color: #0000ff;
+  --even-tr-bg-color: #f6f8fa;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --blockquoute-bg-color: #1d2120;
+    --blockquoute-left-bar-color: white;
+    --link-text-color: #7c9fc2;
+    --even-tr-bg-color: #202024;
+  }
+}
+
 article p {
   margin: 1rem 0 0 0;
 }
@@ -71,16 +87,16 @@ article img {
 }
 
 article blockquote {
-  background-color: #e5e6e6;
+  background-color: var(--blockquoute-bg-color);
   padding: 1rem;
   border-radius: 0 0.5rem 0.5rem 0;
-  border-left: 6px solid black;
+  border-left: 6px solid var(--blockquoute-left-bar-color);
   font-style: italic;
   margin: 0.5rem 0;
 }
 
 article a {
-  color: #0000ff;
+  color: var(--link-text-color);
 }
 
 article a:hover {
@@ -94,7 +110,7 @@ article table {
   font-size: 0.8em;
 
   tr:nth-child(even) {
-    background-color: #f6f8fa;
+    background-color: var(--even-tr-bg-color);
   }
 
   thead {

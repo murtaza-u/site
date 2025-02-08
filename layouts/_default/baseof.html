@@ -2,6 +2,14 @@
 <html lang="{{ or site.Language.LanguageCode site.Language.Lang }}">
   <head>
     {{ partial "head.html" . }}
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <!-- umami analytics -->
     <script
       defer
@@ -9,6 +17,7 @@
       data-website-id="c5daf481-a19e-4e16-89b5-67f08805eb42"
     ></script>
   </head>
+
   <body class="font-sans">
     {{ if not .IsHome }}
       <header>

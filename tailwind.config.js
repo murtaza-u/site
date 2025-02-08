@@ -19,12 +19,25 @@ export const daisyui = {
       light: {
         ...require('daisyui/src/theming/themes')['light'],
         primary: '#abc3d6',
-        'primary-content': 'white',
         secondary: '#1864ab',
-        'secondary-content': 'white',
         accent: '#0000ff',
+        neutral: '#e5e7eb',
+        'primary-content': 'white',
+        'secondary-content': 'white',
         'success-content': 'white',
         'error-content': 'white',
+        '--rounded-btn': '0.5rem',
+        '--rounded-box': '0.5rem'
+      }
+    },
+    {
+      dark: {
+        ...require('daisyui/src/theming/themes')['dark'],
+        neutral: 'black',
+        accent: '#7c9fc2',
+        'base-100': '#232a33',
+        'base-300': '#4470ad',
+        'base-content': '#f8f8ff',
         '--rounded-btn': '0.5rem',
         '--rounded-box': '0.5rem'
       }

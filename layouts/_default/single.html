@@ -2,17 +2,17 @@
   <main
     class="mb-10 mt-5 min-h-screen space-y-4 px-3 lg:mx-auto lg:w-3/5 lg:px-0"
   >
-    <time datetime="{{ .Date | time.Format "2006-01-02T15:04:05-07:00" }}">
+    <time datetime="{{ .Date | time.Format " 2006-01-02T15:04:05-07:00" }}">
       {{ .Date | time.Format "Jan 02, 2006" }}
     </time>
     <h1 class="text-5xl font-bold tracking-wide">{{ .Title | title }}</h1>
     <p>{{ .Params.description }}</p>
-    <hr />
+    <hr class="border-neutral" />
     <article class="text-lg">
       {{ .Content }}
     </article>
     {{ with .GetTerms "tags" }}
-      <hr />
+      <hr class="border-neutral" />
       <ul class="flex flex-wrap">
         {{ range . }}
           <li class="m-1">

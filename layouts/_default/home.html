@@ -50,53 +50,32 @@
         MURTAZA UDAIPURWALA
       </h1>
       <ul class="flex justify-center space-x-4 px-2">
-        {{- with resources.Get "icon/email-28x.svg" }}
-          <li>
-            <a class="py-1" href="mailto:murtaza@murtazau.xyz" target="_blank">
-              <img src="{{ .Permalink }}" alt="E-Mail" />
-            </a>
-          </li>
-        {{- end }}
-        {{- with resources.Get "icon/github-28x.svg" }}
-          <li>
-            <a class="py-1" href="https://github.com/murtaza-u" target="_blank">
-              <img src="{{ .Permalink }}" alt="GitHub" />
-            </a>
-          </li>
-        {{- end }}
-        {{- with resources.Get "icon/mastodon-28x.svg" }}
-          <li>
-            <a
-              class="py-1"
-              href="https://hachyderm.io/@murtaza"
-              target="_blank"
-            >
-              <img src="{{ .Permalink }}" alt="Mastodon" />
-            </a>
-          </li>
-        {{- end }}
-        {{- with resources.Get "icon/twitter-28x.svg" }}
-          <li>
-            <a
-              class="py-1"
-              href="https://twitter.com/murtaza_u_"
-              target="_blank"
-            >
-              <img src="{{ .Permalink }}" alt="Twitter" />
-            </a>
-          </li>
-        {{- end }}
-        {{- with resources.Get "icon/linkedin-28x.svg" }}
-          <li>
-            <a
-              class="py-1"
-              href="https://linkedin.com/in/murtaza-u"
-              target="_blank"
-            >
-              <img src="{{ .Permalink }}" alt="Linkedin" />
-            </a>
-          </li>
-        {{- end }}
+        <li>
+          <a href="mailto:murtaza@murtazau.xyz" target="_blank">
+            <i class="fa-regular fa-envelope fa-xl"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/murtaza-u" target="_blank">
+            <i class="fa-brands fa-github fa-xl"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://linkedin.com/in/murtaza-u" target="_blank">
+            <i class="fa-brands fa-linkedin fa-xl"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://hachyderm.io/@murtaza" target="_blank">
+            <i class="fa-brands fa-mastodon fa-xl"></i>
+          </a>
+        </li>
+
+        <li>
+          <a href="https://x.com/murtaza_u_" target="_blank">
+            <i class="fa-brands fa-x-twitter fa-xl"></i>
+          </a>
+        </li>
       </ul>
     </main>
     <aside class="hidden lg:block">
@@ -111,7 +90,7 @@
     <h2 class="mb-10 text-3xl font-bold tracking-wide">Recent Articles</h2>
     <ul class="flex list-none flex-wrap">
       {{ range first 10 (where .Site.RegularPages "Type" "blog").ByDate.Reverse }}
-        <li class="w-full border p-4 lg:w-1/2">
+        <li class="w-full border border-neutral p-4 lg:w-1/2">
           <a
             class="flex flex-col-reverse lg:flex-row lg:items-center lg:justify-between"
             href="{{ .Permalink }}"
@@ -139,80 +118,4 @@
       {{ end }}
     </ul>
   </section>
-
-  <!-- projects -->
-  <!-- <section class="my-20 px-3 lg:my-10 lg:px-5"> -->
-  <!--   <h2 class="mb-10 text-3xl font-bold tracking-wide">Notable Projects</h2> -->
-  <!--   <ul class="flex flex-wrap items-center justify-evenly"> -->
-  <!--     <li class="card m-2 w-96 bg-base-100 shadow-xl"> -->
-  <!--       <figure> -->
-  <!--         <a href="https://github.com/murtaza-u/ellipsis" target="_blank"> -->
-  <!--           <img -->
-  <!--             src="https://raw.githubusercontent.com/murtaza-u/ellipsis/main/artwork/png/logo-color.png" -->
-  <!--             alt="Ellipsis" -->
-  <!--             loading="lazy" -->
-  <!--           /> -->
-  <!--         </a> -->
-  <!--       </figure> -->
-  <!--       <div class="card-body"> -->
-  <!--         <h2 class="card-title">Ellipsis</h2> -->
-  <!--         <p>Identity in motion, sessions in control</p> -->
-  <!--         <div class="card-actions justify-end"> -->
-  <!--           <a -->
-  <!--             href="https://github.com/murtaza-u/ellipsis" -->
-  <!--             class="btn btn-outline btn-secondary btn-sm" -->
-  <!--             target="_blank" -->
-  <!--             >Visit</a -->
-  <!--           > -->
-  <!--         </div> -->
-  <!--       </div> -->
-  <!--     </li> -->
-  <!--     <li class="card m-2 w-96 bg-base-100 shadow-xl"> -->
-  <!--       <figure> -->
-  <!--         <a href="https://github.com/murtaza-u/keye" target="_blank"> -->
-  <!--           <img -->
-  <!--             src="https://raw.githubusercontent.com/murtaza-u/keye/main/artwork/logo.png" -->
-  <!--             alt="Keye" -->
-  <!--             loading="lazy" -->
-  <!--           /> -->
-  <!--         </a> -->
-  <!--       </figure> -->
-  <!--       <div class="card-body"> -->
-  <!--         <h2 class="card-title">Keye</h2> -->
-  <!--         <p>Key-Value DB with the ability to watch over keys</p> -->
-  <!--         <div class="card-actions justify-end"> -->
-  <!--           <a -->
-  <!--             href="https://github.com/murtaza-u/keye" -->
-  <!--             class="btn btn-outline btn-secondary btn-sm" -->
-  <!--             target="_blank" -->
-  <!--             >Visit</a -->
-  <!--           > -->
-  <!--         </div> -->
-  <!--       </div> -->
-  <!--     </li> -->
-  <!--     <li class="card m-2 w-96 bg-base-100 shadow-xl"> -->
-  <!--       <figure> -->
-  <!--         <a href="https://github.com/murtaza-u/fleet" target="_blank"> -->
-  <!--           <img -->
-  <!--             src="https://raw.githubusercontent.com/murtaza-u/fleet/main/assets/logo.png" -->
-  <!--             alt="Fleet" -->
-  <!--             loading="lazy" -->
-  <!--           /> -->
-  <!--         </a> -->
-  <!--       </figure> -->
-  <!--       <div class="card-body"> -->
-  <!--         <h2 class="card-title">Fleet</h2> -->
-  <!--         <p>Ephemeral HTTP API tunnel</p> -->
-  <!--         <div class="card-actions justify-end"> -->
-  <!--           <a -->
-  <!--             href="https://github.com/murtaza-u/fleet" -->
-  <!--             class="btn btn-outline btn-secondary btn-sm" -->
-  <!--             target="_blank" -->
-  <!--             >Visit</a -->
-  <!--           > -->
-  <!--         </div> -->
-  <!--       </div> -->
-  <!--     </li> -->
-  <!--   </ul> -->
-  <!-- </section> -->
 {{ end }}

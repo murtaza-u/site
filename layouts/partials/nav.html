@@ -1,74 +1,44 @@
 <nav class="navbar flex items-center justify-between">
   <ul class="space-x-4 px-2">
     <li>
-      <a
-        href="/"
-        {{ if or (eq .RelPermalink "/") (eq .RelPermalink "") }}
-          class="py-1 border-y-2 border-primary"
-        {{ else }}
-          class="py-1"
-        {{ end }}
-      >
+      <a href="/" {{ if or (eq .RelPermalink "/" ) (eq .RelPermalink "" ) }} class="py-1 border-y-2 border-primary" {{
+        else }} class="py-1" {{ end }}>
         Home
       </a>
     </li>
     <li>
-      <a
-        href="/blog"
-        {{ if or (eq .RelPermalink "/blog") (eq .RelPermalink "/blog/") }}
-          class="py-1 border-y-2 border-primary"
-        {{ else }}
-          class="py-1"
-        {{ end }}
-      >
+      <a href="/blog" {{ if or (eq .RelPermalink "/blog" ) (eq .RelPermalink "/blog/" ) }}
+        class="py-1 border-y-2 border-primary" {{ else }} class="py-1" {{ end }}>
         Blog
       </a>
     </li>
     <li>
-      <a
-        href="/thoughts"
-        {{ if or (eq .RelPermalink "/thoughts") (eq .RelPermalink "/thoughts/") }}
-          class="py-1 border-y-2 border-primary"
-        {{ else }}
-          class="py-1"
-        {{ end }}
-      >
+      <a href="/thoughts" {{ if or (eq .RelPermalink "/thoughts" ) (eq .RelPermalink "/thoughts/" ) }}
+        class="py-1 border-y-2 border-primary" {{ else }} class="py-1" {{ end }}>
         Thoughts
       </a>
     </li>
   </ul>
   <ul class="space-x-4 px-2">
-    {{- with resources.Get "icon/github-24x.svg" }}
-      <li>
-        <a class="py-1" href="https://github.com/murtaza-u" target="_blank">
-          <img src="{{ .Permalink }}" alt="GitHub" />
-        </a>
-      </li>
-    {{- end }}
-    {{- with resources.Get "icon/mastodon-24x.svg" }}
-      <li>
-        <a class="py-1" href="https://hachyderm.io/@murtaza" target="_blank">
-          <img src="{{ .Permalink }}" alt="Mastodon" />
-        </a>
-      </li>
-    {{- end }}
-    {{- with resources.Get "icon/twitter-24x.svg" }}
-      <li>
-        <a class="py-1" href="https://twitter.com/murtaza_u_" target="_blank">
-          <img src="{{ .Permalink }}" alt="Twitter" />
-        </a>
-      </li>
-    {{- end }}
-    {{- with resources.Get "icon/linkedin-24x.svg" }}
-      <li>
-        <a
-          class="py-1"
-          href="https://linkedin.com/in/murtaza-u"
-          target="_blank"
-        >
-          <img src="{{ .Permalink }}" alt="Linkedin" />
-        </a>
-      </li>
-    {{- end }}
+    <li>
+      <a href="https://github.com/murtaza-u" target="_blank">
+        <i class="fa-brands fa-github fa-lg"></i>
+      </a>
+    </li>
+    <li>
+      <a href="https://hachyderm.io/@murtaza" target="_blank">
+        <i class="fa-brands fa-mastodon fa-lg"></i>
+      </a>
+    </li>
+    <li>
+      <a href="https://x.com/murtaza_u_" target="_blank">
+        <i class="fa-brands fa-x-twitter fa-lg"></i>
+      </a>
+    </li>
+    <li>
+      <a href="https://linkedin.com/in/murtaza-u" target="_blank">
+        <i class="fa-brands fa-linkedin fa-lg"></i>
+      </a>
+    </li>
   </ul>
 </nav>
