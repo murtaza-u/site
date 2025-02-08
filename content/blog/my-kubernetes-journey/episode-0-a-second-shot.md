@@ -2,7 +2,7 @@
 title: 'My Kubernetes Journey - Episode 0: A Second Shot'
 date: 2024-05-24T12:06:09+05:30
 description: (Re)Starting my journey into Kubernetes.
-ogImage: /blog/my-kubernetes-journey/episode-0-a-second-shot/kubernetes-with-gophers.jpg
+ogImage: /kubernetes-with-gophers.jpg
 tags:
   - kubernetes
 ---

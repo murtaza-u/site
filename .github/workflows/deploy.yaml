@@ -17,6 +17,20 @@ jobs:
           hugo-version: '0.136.5'
           extended: true
 
+      - name: Prepare content
+        shell: bash
+        run: |
+          find content/ \
+              -type f \
+              -name "*.md" \
+              -exec sed -i -E 's|(!\[[^]]*\]\()\/*([^)]*\))|\1/\2|g' {} +
+
+          find content/ \
+              -type f \( \
+              -iname "*.jpeg" -o -iname "*.jpg" -o -iname "*.png" -o \
+              -iname "*.gif" -o -iname "*.webp" -o \
+              \) -exec mv {} static/ \;
+
       - name: Build
         run: hugo --minify
 

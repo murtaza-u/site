@@ -2,7 +2,7 @@
 title: A Practical Guide to Self-Signed X.509 Certificates Using OpenSSL
 date: 2024-02-24T11:59:50+05:30
 description: Debunking mysterious OpenSSL commands
-ogImage: /blog/self-signed-x509-certificates/self-signed-x509-certificates.png
+ogImage: /self-signed-x509-certificates.png
 tags:
   - cryptography
   - security

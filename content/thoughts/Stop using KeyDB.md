@@ -13,4 +13,4 @@ It's been about two months now, and we have migrated to Redis with the eviction 
 
 Last week, one of KeyDB's maintainers created this GitHub issue:
 
-![KeyDB GitHub issue - Goodbye](/keydb-goodbye-github-issue.webp)
+![KeyDB GitHub issue - Goodbye](keydb-goodbye-github-issue.webp)

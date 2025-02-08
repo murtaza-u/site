@@ -4,7 +4,7 @@ date: 2024-06-11T18:21:27+05:30
 description: |
   How does Kubernetes distributes traffic across pods on different
   nodes?
-ogImage: /blog/my-kubernetes-journey/episode-1-uncovering-kube-proxy/kubernetes-iptables-meme.jpg
+ogImage: /kubernetes-iptables-meme.jpg
 tags:
   - kubernetes
 ---

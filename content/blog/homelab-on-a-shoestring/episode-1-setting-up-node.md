@@ -4,7 +4,7 @@ date: 2024-12-20T18:22:38+05:30
 description: |-
   Provision an EC2 instance on AWS using Terraform, followed by setting up and
   configuring NixOS on both the EC2 instance and a bare-metal hosts.
-ogImage: /blog/homelab-on-a-shoestring/episode-1-setting-up-node/homelab-on-a-shoestring.webp
+ogImage: /homelab-on-a-shoestring.webp
 tags:
   - homelab
   - kubernetes

@@ -2,7 +2,7 @@
 title: The hierarchial nature of Go context
 date: 2024-06-07T22:20:23+05:30
 description: Learn why the context package in Go is so powerful
-ogImage: /blog/hierarchial-nature-of-go-context/golang-gopher-looking-at-context.png
+ogImage: /golang-gopher-looking-at-context.png
 tags:
   - go
 ---

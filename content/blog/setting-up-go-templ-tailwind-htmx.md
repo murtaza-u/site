@@ -2,7 +2,7 @@
 title: Setting Up Go Templ + Tailwind + HTMX
 date: 2024-01-07T11:10:15+05:30
 description: Born out of excuses of a back-end developer
-ogImage: /blog/setting-up-go-templ-tailwind-htmx/setting-up-go-templ-tailwind-htmx.png
+ogImage: /setting-up-go-templ-tailwind-htmx.png
 tags:
   - go
   - htmx

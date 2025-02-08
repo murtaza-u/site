@@ -2,7 +2,7 @@
 title: 'My Kubernetes Journey - Episode 2: Planning a homelab on AWS & K3S'
 date: 2024-08-02T12:42:48+05:30
 description: It's time! I'm building a homelab, but in the cloud.
-ogImage: /blog/my-kubernetes-journey/episode-2-planning-a-lab-on-aws/technologies-for-aws-lab.jpg
+ogImage: /technologies-for-aws-lab.jpg
 tags:
   - kubernetes
 ---

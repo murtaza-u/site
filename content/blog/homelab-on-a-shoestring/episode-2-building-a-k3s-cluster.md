@@ -5,7 +5,7 @@ date: 2024-12-21T11:12:41+05:30
 description: |-
   Setting up Tailscale on NixOS nodes and building a Kubernetes cluster using
   K3s.
-ogImage: /blog/homelab-on-a-shoestring/episode-2-building-a-k3s-cluster/homelab-on-a-shoestring-tailscale-vpn-k3s-cluster.webp
+ogImage: /homelab-on-a-shoestring-tailscale-vpn-k3s-cluster.webp
 tags:
   - homelab
   - kubernetes
