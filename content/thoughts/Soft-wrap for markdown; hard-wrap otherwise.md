@@ -10,4 +10,3 @@ mdformat --wrap no .
 ```
 
 Now, I can finally copy a paragraph from my editor into text boxes on websites like GitHub, Hashnode, and Slack without worrying about strange formatting.
-

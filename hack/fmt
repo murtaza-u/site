@@ -14,6 +14,6 @@ if [[ "$missing" == 1 ]]; then
 fi
 
 pnpm run format
-mdformat --wrap no .
-cbfmt -w .
-markdownlint .
+mdformat --wrap no content/**/*.md
+cbfmt -w content/**/*.md
+markdownlint content/**/*.md
