@@ -28,7 +28,7 @@ jobs:
           find content/ \
               -type f \( \
               -iname "*.jpeg" -o -iname "*.jpg" -o -iname "*.png" -o \
-              -iname "*.gif" -o -iname "*.webp" -o \
+              -iname "*.gif" -o -iname "*.webp" \
               \) -exec mv {} static/ \;
 
       - name: Build
