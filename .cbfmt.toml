@@ -2,3 +2,5 @@
 bash = ["shfmt"]
 sh = ["shfmt"]
 terraform = [ "terraform fmt" ]
+go = [ "gofumpt" ]
+templ = [ "templ fmt" ]

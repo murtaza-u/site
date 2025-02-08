@@ -13,40 +13,24 @@ tags:
 
 ## Background
 
-- Whenever you create pods, Kubernetes assigns each pod an IP address
-  from the pod CIDR. These IP addresses are ephemeral and can change
-  when a pod is deleted or replaced by a new one.
-- To solve this problem, Kubernetes lets you create a Service. Each
-  Service is assigned a persistent IP address, from the service CIDR. A
-  Service keeps track of the pod IP addresses (using an EndpointSlice)
-  that match its label selector.
-- Other pods in the cluster, regardless of what node they are on, can
-  communicate with our pods using the Service IP.
-- It is said that the Service distributes traffic across your pods. But
-  does it really do that?
+- Whenever you create pods, Kubernetes assigns each pod an IP address from the pod CIDR. These IP addresses are ephemeral and can change when a pod is deleted or replaced by a new one.
+- To solve this problem, Kubernetes lets you create a Service. Each Service is assigned a persistent IP address, from the service CIDR. A Service keeps track of the pod IP addresses (using an EndpointSlice) that match its label selector.
+- Other pods in the cluster, regardless of what node they are on, can communicate with our pods using the Service IP.
+- It is said that the Service distributes traffic across your pods. But does it really do that?
 
 ## Diving deeper
 
-In reality, it's the `Kube-Proxy` that's responsible for distributing
-traffic across our pods. `Kube-Proxy` is a daemon running on every
-worker node, listening for changes to the Service and EndpointSlice
-objects via the `kube-apiserver`.
+In reality, it's the `Kube-Proxy` that's responsible for distributing traffic across our pods. `Kube-Proxy` is a daemon running on every worker node, listening for changes to the Service and EndpointSlice objects via the `kube-apiserver`.
 
 ![Pod to pod communication](pod-to-pod-communication-through-service.png)
 
-That's all well and good, but it still doesn't answer our question:
-*When I make a call to a service IP, how does the network packet route
-from my pod container to the pod running on a different node?*
+That's all well and good, but it still doesn't answer our question: *When I make a call to a service IP, how does the network packet route from my pod container to the pod running on a different node?*
 
 ## Meet `iptables`
 
-`Iptables` is a utility program that allows us (or any userspace
-program) to configure the IP packet rules of the Linux kernel firewall.
-Using `iptables`, we can configure routing rules for our network
-packets.
+`Iptables` is a utility program that allows us (or any userspace program) to configure the IP packet rules of the Linux kernel firewall. Using `iptables`, we can configure routing rules for our network packets.
 
-Let's take a simple example to understand `iptables`. I have two Debian
-virtual machines running - `vm-1` and `vm-2`
+Let's take a simple example to understand `iptables`. I have two Debian virtual machines running - `vm-1` and `vm-2`
 
 ```plaintext
 $ sudo virsh net-dhcp-leases default
@@ -58,12 +42,11 @@ $ sudo virsh net-dhcp-leases default
 ```
 
 - `vm-1`(192.168.122.34) has iptables installed.
-- `vm-2`(192.168.122.179) has nginx web server installed and is serving a
-  static web page on port 80.
+- `vm-2`(192.168.122.179) has nginx web server installed and is serving a static web page on port 80.
 
 We can access the webpage on `vm-2` from our host:
 
-```sh
+```plaintext
 murtaza@host:~$ curl -s http://192.168.122.179 # vm-2 IP
 <!DOCTYPE html>
 <html lang="en">
@@ -79,8 +62,7 @@ murtaza@host:~$ curl -s http://192.168.122.179 # vm-2 IP
 </html>
 ```
 
-Instead of accessing the page from `vm-2` directly, our goal is to
-access it through `vm-1`, like so:
+Instead of accessing the page from `vm-2` directly, our goal is to access it through `vm-1`, like so:
 
 ```sh
 curl -s http://192.168.122.34 # vm-1 IP
@@ -116,14 +98,13 @@ murtaza@vm-1:~$ sudo iptables --table nat --list
 
 ![Routing using iptables](iptables-routing-dnat-snat.png)
 
-By default, Linux won't allow you to forward IP packets from `vm-1` to
-`vm-2`. To enable it, run the following on `vm-1`:
+By default, Linux won't allow you to forward IP packets from `vm-1` to `vm-2`. To enable it, run the following on `vm-1`:
 
 ```sh
 murtaza@vm-1:~$ sudo sysctl -w net.ipv4.ip_forward=1
 ```
 
-```sh
+```plaintext
 murtaza@host:~$ curl http://192.168.122.34/ # vm-1 IP
 <!DOCTYPE html>
 <html lang="en">
@@ -141,23 +122,10 @@ murtaza@host:~$ curl http://192.168.122.34/ # vm-1 IP
 
 **And it works! 🎉**
 
-`iptables` can do much more than what we demonstrated. However, the
-example above will help you understand better how `kube-proxy` might be
-utilizing `iptables` under the hood to proxy requests to pods running on
-different nodes. Keep in mind that Kubernetes networking is much more
-complicated than this. This article was meant to just get your feet wet
-and give you a superficial idea.
+`iptables` can do much more than what we demonstrated. However, the example above will help you understand better how `kube-proxy` might be utilizing `iptables` under the hood to proxy requests to pods running on different nodes. Keep in mind that Kubernetes networking is much more complicated than this. This article was meant to just get your feet wet and give you a superficial idea.
 
 ## Further Details
 
-Kubernetes also utilizes CNI (Container Network Interface) plugins that
-make it possible for the node to determine to which pod the packet needs
-to be forwarded when a packet arrives on its interface. An example of a
-popular CNI plugin is [Flannel](https://github.com/flannel-io/flannel),
-which uses the VXLAN protocol to wrap the Ethernet frame inside a UDP
-packet before forwarding it to the destined pod's node.
+Kubernetes also utilizes CNI (Container Network Interface) plugins that make it possible for the node to determine to which pod the packet needs to be forwarded when a packet arrives on its interface. An example of a popular CNI plugin is [Flannel](https://github.com/flannel-io/flannel), which uses the VXLAN protocol to wrap the Ethernet frame inside a UDP packet before forwarding it to the destined pod's node.
 
-If what I just said sounds complicated, don't worry. This was just meant
-to explain to you how complicated Kubernetes networking is. To learn
-more, I highly recommend watching this
-[talk by Jeff Poole](https://www.youtube.com/watch?v=InZVNuKY5GY).
+If what I just said sounds complicated, don't worry. This was just meant to explain to you how complicated Kubernetes networking is. To learn more, I highly recommend watching this [talk by Jeff Poole](https://www.youtube.com/watch?v=InZVNuKY5GY).

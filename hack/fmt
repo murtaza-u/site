@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+deps=(pnpm mdformat cbfmt gofumpt terraform shfmt templ)
+
+missing=0
+for bin in "${deps[@]}"; do
+    if [[ -z "$(command -v "$bin")" ]]; then
+        echo "$bin not installed"
+        missing=1
+    fi
+done
+if [[ "$missing" == 1 ]]; then
+    exit 1
+fi
+
+pnpm run format
+mdformat --wrap no .
+cbfmt -w .
+markdownlint .

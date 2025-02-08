@@ -10,8 +10,7 @@ tags:
 
 ![Go Templ + HTMX + TailwindCSS](setting-up-go-templ-tailwind-htmx.png)
 
-The goal of this article is to set up a project template with the
-following features:
+The goal of this article is to set up a project template with the following features:
 
 - Set up TEMPL
 - Set up Tailwind CSS
@@ -19,8 +18,7 @@ following features:
 - Automatically rebuild CSS (Tailwind)
 - Live reload Go application on change using Air
 
-This article assumes that you have Go, TEMPL, npm, and Air installed in
-your PATH.
+This article assumes that you have Go, TEMPL, npm, and Air installed in your PATH.
 
 Our project structure will look like this at the end of this article:
 
@@ -48,11 +46,11 @@ Our project structure will look like this at the end of this article:
 
 ## Setup TEMPL
 
-```
+```plaintext
 go get github.com/a-h/templ
 ```
 
-```go
+```templ
 // file: view/index.templ
 package view
 
@@ -71,11 +69,9 @@ templ Index() {
 }
 ```
 
-As you can see, in the `index.templ` file, we have used Tailwind classes
-and HTMX's `hx-get` attribute. When the user clicks on the button, `FOO`
-should be replaced by `BAR`. The foo template is as follows,
+As you can see, in the `index.templ` file, we have used Tailwind classes and HTMX's `hx-get` attribute. When the user clicks on the button, `FOO` should be replaced by `BAR`. The foo template is as follows,
 
-```go
+```templ
 // file: view/partial/foo.templ
 package partial
 
@@ -88,7 +84,7 @@ templ Foo() {
 
 Now, let's create a base layout that wraps the index page.
 
-```go
+```templ
 // file: view/layout/base.templ
 package layout
 
@@ -113,14 +109,11 @@ templ Base(children ...templ.Component) {
 }
 ```
 
-The base template takes in a variadic argument of children components
-that can be rendered inside it. It also includes the built tailwind
-stylesheet (we'll come back to this later) as well as imports HTMX.
+The base template takes in a variadic argument of children components that can be rendered inside it. It also includes the built tailwind stylesheet (we'll come back to this later) as well as imports HTMX.
 
-Now that all our templates are in place, let's generate the
-corresponding `go` file:
+Now that all our templates are in place, let's generate the corresponding `go` file:
 
-```
+```plaintext
 templ generate
 ```
 
@@ -154,15 +147,13 @@ func main() {
 }
 ```
 
-In addition to the template routes, we also need to create a file server
-to serve the Tailwind CSS stylesheet and other static assets (in the
-future).
+In addition to the template routes, we also need to create a file server to serve the Tailwind CSS stylesheet and other static assets (in the future).
 
 ## Setup Tailwind CSS
 
 In order to set up Tailwind, we need to initialize a node module:
 
-```
+```plaintext
 npm init -y
 ```
 
@@ -186,8 +177,7 @@ export default {
 }
 ```
 
-The `content` field is very important. It asks Tailwind to watch over
-all the files ending with `.templ` inside the `view` directory.
+The `content` field is very important. It asks Tailwind to watch over all the files ending with `.templ` inside the `view` directory.
 
 Next, add two convenience scripts to `package.json`:
 
@@ -198,10 +188,7 @@ Next, add two convenience scripts to `package.json`:
 }
 ```
 
-The `build` script compiles Tailwind CSS stylesheet for production, and
-the `watch` script watches over changes to the content directory
-(`view/**/*.templ`) we configured above and automatically recompiles the
-stylesheet.
+The `build` script compiles Tailwind CSS stylesheet for production, and the `watch` script watches over changes to the content directory (`view/**/*.templ`) we configured above and automatically recompiles the stylesheet.
 
 File: `package.json`
 
@@ -223,19 +210,13 @@ File: `package.json`
 
 ## Result
 
-![](setting-up-go-templ-tailwind-htmx-result.gif)
+![Result](setting-up-go-templ-tailwind-htmx-result.gif)
 
-We have successfully set up a project with TEMPL, HTMX, and Tailwind CSS
-and configured Tailwind to automatically rebuild the stylesheet.
-However, there is one inconvenience that we still have to face during
-development - we need to restart the Go app every time we make a change
-to our project. Let's fix that.
+We have successfully set up a project with TEMPL, HTMX, and Tailwind CSS and configured Tailwind to automatically rebuild the stylesheet. However, there is one inconvenience that we still have to face during development - we need to restart the Go app every time we make a change to our project. Let's fix that.
 
 ## Air
 
-Moving on to the final piece of the article, Air is a program that
-allows us to live reload the Go app. To set it up with TEMPL, we need to
-create a `.air.toml` file in the root of the project.
+Moving on to the final piece of the article, Air is a program that allows us to live reload the Go app. To set it up with TEMPL, we need to create a `.air.toml` file in the root of the project.
 
 ```toml
 # file: .air.toml
@@ -270,8 +251,7 @@ tmp_dir = "bin"
   clean_on_exit = true
 ```
 
-To run Air, all you need to do is type `air`. Air will automatically
-pick up the `toml` file and run the Go app.
+To run Air, all you need to do is type `air`. Air will automatically pick up the `toml` file and run the Go app.
 
 ```plaintext
 air
@@ -279,4 +259,4 @@ air
 
 ## Ending
 
-![](setting-up-go-templ-tailwind-htmx-ending.gif)
+![Ending](setting-up-go-templ-tailwind-htmx-ending.gif)

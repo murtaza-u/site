@@ -7,7 +7,12 @@
   outputs = { nixpkgs, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = import nixpkgs { inherit system; };
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
+            "terraform"
+          ];
+        };
       in
       {
         formatter = pkgs.nixpkgs-fmt;
@@ -19,7 +24,6 @@
             nodePackages.pnpm
             nodePackages.vscode-langservers-extracted
             nodePackages.typescript-language-server
-            prettierd
             tailwindcss-language-server
             emmet-language-server
             netlify-cli
@@ -29,6 +33,9 @@
             shfmt
             mdformat
             python312Packages.mdformat-frontmatter
+            gofumpt
+            templ
+            terraform
           ];
         };
       });

@@ -12,8 +12,7 @@ tags:
 
 ## Certificate Authority (CA)
 
-The CA serves as the root authority. All certificates generated for
-different services will be signed by it. Let's create our CA first.
+The CA serves as the root authority. All certificates generated for different services will be signed by it. Let's create our CA first.
 
 ```plaintext
 mkdir ca
@@ -30,22 +29,16 @@ openssl req \
 Now, let's dissect the command above:
 
 - `req`: Used to generate a certificate signing request (CSR).
-- `-x509`: Tells OpenSSL to generate a certificate directly instead of a
-  CSR.
-- `-newkey rsa:4096`: Generates a new RSA key pair with a key length of
-  4096 bits.
+- `-x509`: Tells OpenSSL to generate a certificate directly instead of a CSR.
+- `-newkey rsa:4096`: Generates a new RSA key pair with a key length of 4096 bits.
 - `-days 365`: Expires the certificate after 365 days.
-- `-nodes`: Stands for no DES (Data Encryption Standard), tells OpenSSL
-  not to encrypt the private key. By default, OpenSSL encrypts the
-  private key with a passphrase.
+- `-nodes`: Stands for no DES (Data Encryption Standard), tells OpenSSL not to encrypt the private key. By default, OpenSSL encrypts the private key with a passphrase.
 - `-keyout`: Specifies the destination of the private key file.
 - `-out`: Specifies the destination of the certificate file.
 
-You'll be prompted to fill out a few options. Enter '.' to leave the
-field blank. Typically, I fill out the organization name (O), common
-name (CN), and email address.
+You'll be prompted to fill out a few options. Enter '.' to leave the field blank. Typically, I fill out the organization name (O), common name (CN), and email address.
 
-```
+```plaintext
 -----
 You are about to be asked to enter information that will be incorporated
 into your certificate request.
@@ -80,9 +73,7 @@ openssl x509 -in ca/cert.pem -noout -text
 
 ## Generating certificate for service 1
 
-To generate a signed certificate, we need to first generate a private
-key and a CSR (Certificate Signing Request). **Hint**: We omit the
-`-x509` option.
+To generate a signed certificate, we need to first generate a private key and a CSR (Certificate Signing Request). **Hint**: We omit the `-x509` option.
 
 ```plaintext
 mkdir service1
@@ -95,21 +86,11 @@ openssl req \
     -subj "/O=Murtaza Udaipurwala/CN=service1.murtazau.xyz/emailAddress=murtaza@murtazau.xyz"
 ```
 
-The above command is similar to the one we used to generate the CA,
-except that we are not generating the certificate directly (by omitting
-the `-x509` option). This command creates a private key
-(`service1/key.pem`) and a CSR (`service1/req.pem`). We also don't need
-to specify the expiry (`-days`) because expiry is a parameter of the
-certificate and not the CSR.
+The above command is similar to the one we used to generate the CA, except that we are not generating the certificate directly (by omitting the `-x509` option). This command creates a private key (`service1/key.pem`) and a CSR (`service1/req.pem`). We also don't need to specify the expiry (`-days`) because expiry is a parameter of the certificate and not the CSR.
 
-This time instead of filling out the options, like we did for the CA,
-we've specified the organization (O), common name (CN), and the email
-address using the `-subj` flag. You can omit the `-subj` flag if you
-prefer an interactive dialog instead.
+This time instead of filling out the options, like we did for the CA, we've specified the organization (O), common name (CN), and the email address using the `-subj` flag. You can omit the `-subj` flag if you prefer an interactive dialog instead.
 
-Next, let's generate a certificate for service1 using the CSR
-(`service1/req.pem`). We'll use the CA's certificate and private key to
-sign this certificate.
+Next, let's generate a certificate for service1 using the CSR (`service1/req.pem`). We'll use the CA's certificate and private key to sign this certificate.
 
 ```plaintext
 openssl x509 \
@@ -123,8 +104,7 @@ openssl x509 \
 Let's dissect this command:
 
 - `x509`: Tells OpenSSL that we want to generate an X.509 certificate.
-- `-req -in`: Specifies that the input file is a CSR
-  (`service1/req.pem`).
+- `-req -in`: Specifies that the input file is a CSR (`service1/req.pem`).
 - `-days 90`: Expires the certificate after 90 days.
 - `-CA`: Path to CA's certificate.
 - `-CAkey`: Path to CA's private key.
@@ -147,8 +127,7 @@ Our self-signed certificate for Service 1 is now ready.
 
 ## Renewing CA's certificate
 
-Our CA's certificate will expire after 365 days. In order to renew it,
-we need to create a new CSR and generate a new certificate.
+Our CA's certificate will expire after 365 days. In order to renew it, we need to create a new CSR and generate a new certificate.
 
 ```plaintext
 openssl req \
@@ -178,15 +157,11 @@ openssl x509 \
     -out ca/new_cert.pem
 ```
 
-This command should look similar to the one we studied in the previous
-section. We are using the old CA certificate to generate a new one.
-Finally, replace `ca/cert.pem` with `ca/new_cert.pem`.
+This command should look similar to the one we studied in the previous section. We are using the old CA certificate to generate a new one. Finally, replace `ca/cert.pem` with `ca/new_cert.pem`.
 
 ## Renewing service 1's certificate
 
-Renewing an expired certificate for your services is exactly similar to
-renewing the CA's certificate. We create a new CSR and use it to
-generate a new self-signed certificate. Below is the command to do so:
+Renewing an expired certificate for your services is exactly similar to renewing the CA's certificate. We create a new CSR and use it to generate a new self-signed certificate. Below is the command to do so:
 
 ```plaintext
 openssl req \
@@ -215,5 +190,4 @@ openssl x509 -in path_to_certificate.pem -noout -text
 
 - Every certificate should have an expiry.
 - Certificates needs to be renewed once they expire.
-- A certificate signing request (CSR) needs to be made to the CA to
-  generate a signed certificate.
+- A certificate signing request (CSR) needs to be made to the CA to generate a signed certificate.

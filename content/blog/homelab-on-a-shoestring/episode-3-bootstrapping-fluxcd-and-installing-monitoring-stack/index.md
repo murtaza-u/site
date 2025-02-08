@@ -11,17 +11,11 @@ tags:
   - homelab
 ---
 
-![](homelab-on-a-shoestring-bootstrapping-fluxcd.webp)
+![Homelab on a shoestring bootstrapping - FluxCD](homelab-on-a-shoestring-bootstrapping-fluxcd.webp)
 
 ## Tainting `srv-onprem-0`
 
-Before we move to bootstrapping Flux, there is one important thing I need to
-do. You see, node `srv-onprem-0` is not guaranteed to be available all the
-time, as I may turn it off every now and then. Moreover, `srv-onprem-0` is
-primarily for hosting Pi-hole and my media server, and I do not really want
-any workloads to run on it unless I explicitly specify so. Adding taints to
-the node will guarantee that no workloads will execute on it unless I
-explicitly define toleration against the taint.
+Before we move to bootstrapping Flux, there is one important thing I need to do. You see, node `srv-onprem-0` is not guaranteed to be available all the time, as I may turn it off every now and then. Moreover, `srv-onprem-0` is primarily for hosting Pi-hole and my media server, and I do not really want any workloads to run on it unless I explicitly specify so. Adding taints to the node will guarantee that no workloads will execute on it unless I explicitly define toleration against the taint.
 
 Let's start with adding a couple of important labels to our nodes.
 
@@ -58,12 +52,9 @@ And that is indeed the case!
 
 ## Bootstrapping FluxCD using Terraform
 
-FluxCD is a gitops tool. You commit changes to a git repository and Flux takes
-care of syncing them to your cluster. Your git repository becomes the source
-of truth for your infrastructure.
+FluxCD is a gitops tool. You commit changes to a git repository and Flux takes care of syncing them to your cluster. Your git repository becomes the source of truth for your infrastructure.
 
-Flux provides a straightforward Terraform module to bootstrap itself, which I
-have customized to suit my infrastructure.
+Flux provides a straightforward Terraform module to bootstrap itself, which I have customized to suit my infrastructure.
 
 ```hcl
 terraform {
@@ -159,23 +150,15 @@ variable "github_token" {
 }
 ```
 
-The `github_token` referenced in the Terraform code above is a fine-grained
-GitHub token with read-write access to the administration and content of my
-[infra](https://github.com/murtaza-u/infra) repository. As mentioned in the
-previous episode, all my secrets, including this one, are encrypted using SOPS
-and committed to git.
+The `github_token` referenced in the Terraform code above is a fine-grained GitHub token with read-write access to the administration and content of my [infra](https://github.com/murtaza-u/infra) repository. As mentioned in the previous episode, all my secrets, including this one, are encrypted using SOPS and committed to git.
 
-There is one problem, though. If I run terraform apply now, Terraform will
-attempt to create the GitHub repository and throw an error saying that the
-repository already exists. This happens because Terraform does not have the
-state of my GitHub repository. To feed it with the state, I ran:
+There is one problem, though. If I run terraform apply now, Terraform will attempt to create the GitHub repository and throw an error saying that the repository already exists. This happens because Terraform does not have the state of my GitHub repository. To feed it with the state, I ran:
 
 ```text
 terraform import github_repository.this infra
 ```
 
-After this, when I ran `terraform apply`, Terraform used the existing GitHub
-repository and my `kubeconfig` file to bootstrap FluxCD.
+After this, when I ran `terraform apply`, Terraform used the existing GitHub repository and my `kubeconfig` file to bootstrap FluxCD.
 
 ```text
 commit 183044d9e000501425f8a16838b975d38b81364a
@@ -191,18 +174,13 @@ Date:   Mon Dec 23 14:54:06 2024 +0530
     Add Flux v2.4.0 component manifests
 ```
 
-The above two commits were added by FluxCD to my GitHub repository during the
-boostrap.
+The above two commits were added by FluxCD to my GitHub repository during the boostrap.
 
 ## Repository Structure
 
-After setting up Flux, I installed several things on my cluster, including
-Prometheus, Grafana, Loki, AlertManager, and cert-manager. I follow
-[FluxCD's recommended approach](https://fluxcd.io/flux/guides/repository-structure/)
-to structure my repository. It is so well thought out, I'm a sucker for
-well-thought opinions.
+After setting up Flux, I installed several things on my cluster, including Prometheus, Grafana, Loki, AlertManager, and cert-manager. I follow [FluxCD's recommended approach](https://fluxcd.io/flux/guides/repository-structure/) to structure my repository. It is so well thought out, I'm a sucker for well-thought opinions.
 
-```
+```plaintext
 .
 ├── apps
 │   ├── base
@@ -298,10 +276,6 @@ well-thought opinions.
 
 ## What's Next?
 
-I’m not sure, but as my homelab evolves, I'll keep writing about whatever I
-find interesting. If you find something useful in my homelab, feel free to
-copy it from my [GitHub `infra` repository](https://github.com/murtaza-u/infra).
+I’m not sure, but as my homelab evolves, I'll keep writing about whatever I find interesting. If you find something useful in my homelab, feel free to copy it from my [GitHub `infra` repository](https://github.com/murtaza-u/infra).
 
-Before signing off, if you run a homelab too, I'd love to connect with you.
-You can find my social media handles [here](https://murtazau.xyz). Feel free
-to drop me a DM.
+Before signing off, if you run a homelab too, I'd love to connect with you. You can find my social media handles [here](https://murtazau.xyz). Feel free to drop me a DM.
